@@ -1,3 +1,55 @@
+// Node (Project) Data
+const nodeData = {
+    'traveline': {
+        title: 'Traveline Travels',
+        img: 'https://raw.githubusercontent.com/yo-dhav/Traveline-Travels/main/assets/images/screenshot_home.png',
+        description: 'A modern tourism website built to provide a visually rich and user-friendly interface for travel exploration. Emphasizes clean UI layout, smooth browsing experience, and responsive design for all devices. Built with pure HTML, CSS, and JS to ensure lightweight performance.',
+        tags: ['HTML5', 'CSS3', 'JavaScript', 'UI/UX'],
+        link: 'https://github.com/yo-dhav/Traveline-Travels'
+    },
+    'symphony': {
+        title: 'Symphony Care',
+        img: 'assets/symphony_care.png',
+        description: 'A comprehensive medical healthcare web application focusing on delivering detailed patient insights and a clean dashboard for health tracking. Designed to streamline medical data visualization for healthcare professionals.',
+        tags: ['Web Tech', 'UI/UX', 'Healthcare'],
+        link: 'https://github.com/yo-dhav/SymphonyCare'
+    },
+    'samegame': {
+        title: 'SameGame Puzzle',
+        img: 'https://raw.githubusercontent.com/yo-dhav/SameGame/main/images/Screenshot%202026-04-05%20113029.png',
+        description: 'An engaging puzzle game implemented using core Design and Analysis of Algorithms (DAA) concepts. The project demonstrates logical problem-solving, algorithmic efficiency, and an understanding of state management in Java.',
+        tags: ['Java', 'Algorithms', 'Game Dev'],
+        link: 'https://github.com/yo-dhav/SameGame'
+    }
+};
+
+// Modal Functions
+window.openNodeModal = function(nodeId) {
+    const data = nodeData[nodeId];
+    if (!data) return;
+
+    document.getElementById('modal-title').textContent = data.title;
+    document.getElementById('modal-img').src = data.img;
+    document.getElementById('modal-description').textContent = data.description;
+    document.getElementById('modal-link').href = data.link;
+
+    const tagsContainer = document.getElementById('modal-tags');
+    tagsContainer.innerHTML = '';
+    data.tags.forEach(tag => {
+        const span = document.createElement('span');
+        span.textContent = tag;
+        tagsContainer.appendChild(span);
+    });
+
+    const modal = document.getElementById('node-modal');
+    modal.classList.add('active');
+};
+
+window.closeNodeModal = function() {
+    const modal = document.getElementById('node-modal');
+    modal.classList.remove('active');
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
@@ -99,8 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "max-glare": 0.2,
         });
 
-        // Initialize for project cards specifically
-        VanillaTilt.init(document.querySelectorAll(".project-card"), {
+        // Initialize for project nodes specifically
+        VanillaTilt.init(document.querySelectorAll(".node-card"), {
             max: 8,
             speed: 300,
             glare: true,
@@ -150,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         animateFollower();
 
-        const hoverElements = document.querySelectorAll('a, button, .project-card, .btn, .social-btn');
+        const hoverElements = document.querySelectorAll('a, button, .node-card, .btn, .social-btn');
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursor.classList.add('hovered');
